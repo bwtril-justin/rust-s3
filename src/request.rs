@@ -47,7 +47,11 @@ impl<'a> Request<'a> {
     }
 
     fn url(&self) -> Url {
-        let mut url_str = String::from("https://");
+        let mut url_str = if self.bucket.use_ssl() {
+            String::from("https://")
+        } else {
+            String::from("http://")
+        };
         url_str.push_str(self.bucket.host());
         url_str.push_str("/");
         url_str.push_str(self.bucket.name());

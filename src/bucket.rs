@@ -28,6 +28,7 @@ pub struct Bucket {
     pub credentials: Credentials,
     pub extra_headers: Headers,
     pub extra_query: Query,
+    pub use_ssl: bool,
 }
 
 impl Bucket {
@@ -51,6 +52,7 @@ impl Bucket {
             credentials,
             extra_headers: HashMap::new(),
             extra_query: HashMap::new(),
+            use_ssl: true,
         }
     }
 
@@ -195,6 +197,11 @@ impl Bucket {
     /// Get the region this object will connect to.
     pub fn region(&self) -> Region {
         self.region.clone()
+    }
+
+    /// Get the flag that determines whether to use SSL connection
+    pub fn use_ssl(&self) -> bool {
+        self.use_ssl
     }
 
     /// Get a reference to the AWS access key.
